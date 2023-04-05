@@ -4,7 +4,6 @@ import { galleryItems } from "./gallery-items.js";
 const gallery = document.querySelector(".gallery");
 
 gallery.insertAdjacentHTML("afterbegin", createImagesItems(galleryItems));
-gallery.addEventListener("click", onGalleryClick);
 
 function createImagesItems(items) {
   return items
@@ -18,22 +17,11 @@ function createImagesItems(items) {
     .join("");
 }
 
-function onGalleryClick(e) {
-  e.preventDefault();
+const lightbox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
 
-  const currentEl = e.target;
-  const imagesLink = currentEl.closest(".gallery__link");
-
-  if (!imagesLink) {
-    return;
-  }
-
-  openModalImg();
-}
-
-function openModalImg() {
-  const lightbox = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionDelay: 250,
-  });
-}
+lightbox.on("error.simplelightbox", function (e) {
+  console.log(e);
+});

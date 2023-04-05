@@ -48,7 +48,6 @@ function openModalImg(e) {
 }
 
 function onEscapeClose(e) {
-  console.log(e);
   if (e.code === "Escape") {
     instance.close();
     document.removeEventListener("keydown", onEscapeClose);
